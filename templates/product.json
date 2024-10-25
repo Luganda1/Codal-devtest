@@ -76,7 +76,7 @@
           "settings": {
             "heading": "Product Data Sheets",
             "icon": "none",
-            "content": "{{ product.metafields.custom.product_data_sheets | metafield_tag }}",
+            "content": "<p>{{ product.metafields.custom.product_data_sheet | metafield_tag }}</p>",
             "page": ""
           }
         },
@@ -85,7 +85,7 @@
           "settings": {
             "heading": "Available Variants",
             "icon": "none",
-            "content": "{{ product.metafields.custom.available_variants | metafield_tag }}",
+            "content": "<p>{{ product.metafields.custom.product_variants | metafield_tag }}</p>",
             "page": ""
           }
         },
@@ -94,7 +94,7 @@
           "settings": {
             "heading": "Compare",
             "icon": "none",
-            "content": "{{ product.metafields.custom.compare | metafield_tag }}",
+            "content": "<p>{{ product.metafields.custom.product_compare | metafield_tag }}</p>",
             "page": ""
           }
         }
