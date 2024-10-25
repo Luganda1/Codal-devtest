@@ -1,0 +1,113 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' %}
+    <div class="breadcrumbs-container">
+        {% assign templateName = template | split: '.' | first %}
+        <nav class="breadcrumbs-nav container {{class}}" role="navigation" aria-label="breadcrumbs">
+            <ol class="breadcrumbs">
+
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="/" title="Home">Home</a>
+                </li>
+
+                {%- for link in linklists.main-menu.links -%}
+                    {%- if link.child_active -%}
+                        <li class="breadcrumbs__item">
+                            <a class="breadcrumbs__link" href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title | escape }}</a>
+                        </li>
+                    {%- endif -%}
+                    {%- if link.links != blank -%}
+                        {%- for childlink in link.links -%}
+                            {%- if childlink.child_active -%}
+                                <li class="breadcrumbs__item">
+                                    <a class="breadcrumbs__link" href="{{ childlink.url }}" title="{{ childlink.title | escape }}">{{ childlink.title | escape }}</a>
+                                </li>
+                            {%- endif -%}
+                            {%- if childlink.links != blank -%}
+                                {%- for grandchildlink in childlink.links -%}
+                                    {%- if grandchildlink.child_active -%}
+                                        <li class="breadcrumbs__item">
+                                            <a class="breadcrumbs__link" href="{{ grandchildlink.url }}" title="{{ grandchildlink.title | escape }}">{{ grandchildlink.title | escape }}</a>
+                                        </li>
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    {%- endif -%}
+                {%- endfor -%}
+
+                {% case templateName %}
+                {% when 'page' %}
+                    <li class="breadcrumbs__item">
+                        <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+                    </li>
+
+                {% when 'product' %}
+                    {% if collection.url %}
+                        <li class="breadcrumbs__item">
+                            {{ collection.title | link_to: collection.url }}
+                        </li>
+                    {% endif %}
+                    <li class="breadcrumbs__item active-item">
+                        <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+                    </li>
+
+                {% when 'collection' and collection.handle %}
+                    {%- for child in linklists.main-menu -%}
+                      
+                    {%- endfor -%}
+                    {% if current_tags %}
+                        <li class="breadcrumbs__item">{{ collection.title | link_to: collection.url }}</li>
+                        <li class="breadcrumbs__item">
+                            {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+                            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumbs__item active-item">
+                            <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+                        </li>
+                    {% endif %}
+
+                {% when 'blog' %}
+                    {% if current_tags %}
+                        <li class="breadcrumbs__item">{{ blog.title | link_to: blog.url }}</li>
+                        <li class="breadcrumbs__item">
+                            {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+                            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumbs__item active-item">
+                            <a class="breadcrumbs__link breadcrumbs__link--active" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                        </li>
+                    {% endif %}
+
+                {% when 'article' %}
+                    <li class="breadcrumbs__item">{{ blog.title | link_to: blog.url }}</li>
+                    <li class="breadcrumbs__item">
+                        <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+                    </li>
+
+                {%- when 'customers/addresses' -%}
+                    <li class="breadcrumbs__item">
+                        <a class="breadcrumbs__link" href="/account" title="{{ 'customer.account.title' | t }}">{{ 'customer.account.title' | t }}</a>
+                    </li>
+                    <li class="breadcrumbs__item active-item" aria-current="page">
+                        <p class="breadcrumbs__link breadcrumbs__link--active" aria-current="page">{{ page_title }}</p>
+                    </li>
+                
+                {%- when 'customers/order' -%}
+                    <li class="breadcrumbs__item">
+                        <a class="breadcrumbs__link" href="/account" title="{{ 'customer.account.title' | t }}">{{ 'customer.account.title' | t }}</a>
+                    </li>
+                    <li class="breadcrumbs__item active-item" aria-current="page">
+                        <p class="breadcrumbs__link breadcrumbs__link--active" aria-current="page">{{ page_title }}</p>
+                    </li>
+                    
+                {% else %}
+                    <li class="breadcrumbs__item active-item" aria-current="page">
+                        <p class="breadcrumbs__link breadcrumbs__link--active" aria-current="page">{{ page_title }}</p>
+                    </li>
+                {% endcase %}
+
+            </ol>
+        </nav>
+    </div>
+{% endunless %}

@@ -1,0 +1,17 @@
+{% comment %}
+  Read More
+  Accepts:
+  - full_text: {String} Full text
+  - slice: {Number} Number to slice string at (optional)
+  Usage:
+  {% render 'read-more', full_text: '' %}
+{% endcomment %}
+
+{%- assign sliceAt = 337 -%}
+{%- if slice -%}
+  {%- assign sliceAt = slice -%}
+{%- endif -%}
+<div class="read-more-container">
+  <span class="part">{{ full_text | slice: 0, sliceAt }} <span class="read-more">See more</span></span>
+  <span class="full">{{ full_text }}</span>
+</div>

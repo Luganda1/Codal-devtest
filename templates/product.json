@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": { "picker_type": "button", "swatch_shape": "square" }
+        },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "collapsible_tab_nQnigp": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.product_desc | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_kC8mEd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Specifications",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.product_specification | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_DkWxgj": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Data Sheets",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.product_data_sheets | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_iz49DL": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Available Variants",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.available_variants | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_ACFYtA": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Compare",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.compare | metafield_tag }}",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "collapsible_tab_nQnigp",
+        "collapsible_tab_kC8mEd",
+        "collapsible_tab_DkWxgj",
+        "collapsible_tab_iz49DL",
+        "collapsible_tab_ACFYtA"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "contain",
+        "gallery_layout": "columns",
+        "media_position": "left",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": ["main", "related-products"]
+}
